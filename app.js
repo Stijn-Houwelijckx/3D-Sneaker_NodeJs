@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const config = require("config");
+const cors = require("cors");
 
 // Connecting to the database
 const mongoose = require("mongoose");
@@ -21,6 +22,8 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
+
+app.use(cors());
 
 app.use(logger("dev"));
 app.use(express.json());
