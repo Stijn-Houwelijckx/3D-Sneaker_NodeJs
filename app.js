@@ -6,7 +6,10 @@ var logger = require("morgan");
 
 // Connecting to the database
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://127.0.0.1:27017/MONGODBLES");
+//mongoose.connect("mongodb://127.0.0.1:27017/MONGODBLES");
+mongoose.connect(
+  "mongodb+srv://stijn:XsXH0vyvV0dYOs4N@mongodblesclusters.ebmpd.mongodb.net/?retryWrites=true&w=majority&appName=MONGODBLESCLUSTERS"
+);
 
 // Importing the routes
 var messageRouter = require("./routes/api/v1/messages");
