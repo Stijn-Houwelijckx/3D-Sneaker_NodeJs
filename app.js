@@ -3,13 +3,15 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const config = require("config");
 
 // Connecting to the database
 const mongoose = require("mongoose");
+const connection = config.get("mongodb");
+console.log("connection: " + connection);
+
 //mongoose.connect("mongodb://127.0.0.1:27017/MONGODBLES");
-mongoose.connect(
-  "mongodb+srv://stijn:XsXH0vyvV0dYOs4N@mongodblesclusters.ebmpd.mongodb.net/?retryWrites=true&w=majority&appName=MONGODBLESCLUSTERS"
-);
+mongoose.connect(connection);
 
 // Importing the routes
 var messageRouter = require("./routes/api/v1/messages");
