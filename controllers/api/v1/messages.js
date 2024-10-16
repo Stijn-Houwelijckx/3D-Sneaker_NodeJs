@@ -41,8 +41,29 @@ const show = async (req, res) => {
   });
 };
 
+// Update message by id
+const update = async (req, res) => {
+  const id = req.params.id;
+  const user = req.body.message.user;
+  const text = req.body.message.text;
+
+  // Find message by id
+  const message = await Message.findById(id);
+  message.user = user;
+  message.text = text;
+  message.save().then(() => {
+    res.json({
+      status: "success",
+      data: {
+        message: message,
+      },
+    });
+  });
+};
+
 module.exports = {
   create,
   index,
   show,
+  update,
 };
