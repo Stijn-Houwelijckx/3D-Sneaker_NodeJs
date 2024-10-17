@@ -18,6 +18,19 @@ const create = (req, res) => {
 
 // Get all messages
 const index = async (req, res) => {
+  // Find messages by username
+  if (req.query.user) {
+    const user = req.query.user;
+    const messages = await Message.find({ user: user });
+    res.json({
+      status: "success",
+      data: {
+        messages: messages,
+      },
+    });
+    return;
+  }
+
   // Find all messages
   const messages = await Message.find({});
   res.json({
