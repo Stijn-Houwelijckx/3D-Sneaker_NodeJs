@@ -18,19 +18,6 @@ const create = (req, res) => {
 
 // Get all messages
 const index = async (req, res) => {
-  // Find messages by username
-  if (req.query.user) {
-    const user = req.query.user;
-    const messages = await Message.find({ user: user });
-    res.json({
-      status: "success",
-      data: {
-        messages: messages,
-      },
-    });
-    return;
-  }
-
   // Find all messages
   const messages = await Message.find({});
   res.json({
@@ -60,10 +47,15 @@ const update = async (req, res) => {
   const user = req.body.message.user;
   const text = req.body.message.text;
 
-  // Find message by id
+  // Find message by id and update
   const message = await Message.findById(id);
-  message.user = user;
-  message.text = text;
+  if (user) {
+    message.user = user;
+  }
+  if (text) {
+    message.text = text;
+  }
+
   message.save().then(() => {
     res.json({
       status: "success",
