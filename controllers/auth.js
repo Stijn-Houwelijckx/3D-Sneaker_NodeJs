@@ -1,5 +1,6 @@
 const User = require("../models/api/v1/User");
 
+// Signup controller
 const signup = async (req, res) => {
   try {
     // Get user input
@@ -70,6 +71,46 @@ const signup = async (req, res) => {
   }
 };
 
+// Login controller
+const login = async (req, res) => {
+  try {
+    // Get user input
+    const { email, password } = req.body.user;
+
+    // Ensure all fields are present
+    if (!email || !password) {
+      return res.status(400).json({
+        status: "error",
+        message: "Please fill in all fields",
+      });
+    }
+
+    // Authenticate user
+    await User.authenticate()(email, password).then((user) => {
+      // If user is not found
+      if (user.user === false) {
+        return res.status(400).json({
+          status: "error",
+          message: "Invalid credentials",
+        });
+      }
+
+      // If user is found
+      res.status(200).json({
+        status: "success",
+        data: { user: user },
+      });
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      message: "Server error",
+      error: err.message,
+    });
+  }
+};
+
 module.exports = {
   signup,
+  login,
 };
