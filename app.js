@@ -16,6 +16,7 @@ mongoose.connect(connection);
 
 // Importing the routes
 var userRouter = require("./routes/api/v1/users");
+var orderRouter = require("./routes/api/v1/orders");
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Using the routes
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/orders", orderRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
