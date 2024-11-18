@@ -1,4 +1,5 @@
 const User = require("../models/api/v1/User");
+const jwt = require("jsonwebtoken");
 
 // Signup controller
 const signup = async (req, res) => {
@@ -50,9 +51,19 @@ const signup = async (req, res) => {
     await user
       .save()
       .then((user) => {
+        let token = jwt.sign(
+          {
+            uid: user._id,
+            email: user.email,
+          },
+          "TemporarySecretKey"
+        );
+
         res.status(201).json({
           status: "success",
-          data: { user: user },
+          data: {
+            token: token,
+          },
         });
       })
       .catch((err) => {
