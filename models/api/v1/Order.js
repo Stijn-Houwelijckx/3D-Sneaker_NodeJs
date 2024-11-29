@@ -2,7 +2,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
-  user: { type: Schema.Types.ObjectId, ref: "User", required: true }, // Reference to User
+  user: {
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    address: {
+      street: { type: String, required: true },
+      houseNr: { type: String, required: true },
+      zipcode: { type: String, required: true },
+      city: { type: String, required: true },
+    },
+  },
   sneaker: {
     parts: [
       {
@@ -15,8 +24,8 @@ const OrderSchema = new Schema({
   orderDate: { type: Date, default: Date.now },
   status: {
     type: String,
-    enum: ["pending", "completed", "cancelled"],
-    default: "pending",
+    enum: ["Pending", "In production", "Shipped", "Completed"],
+    default: "Pending",
   },
 });
 
