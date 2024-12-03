@@ -101,8 +101,8 @@ const login = async (req, res) => {
       // If user is not found
       if (user.user === false) {
         return res.status(400).json({
-          status: "error",
-          message: "Invalid credentials",
+          status: "failed",
+          message: "Login failed",
         });
       }
 
