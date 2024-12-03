@@ -106,10 +106,20 @@ const login = async (req, res) => {
         });
       }
 
+      // Generate token
+      let token = jwt.sign(
+        {
+          uid: user.user._id,
+          email: user.user.email,
+        },
+        "TemporarySecretKey"
+      );
       // If user is found
       res.status(200).json({
         status: "success",
-        data: { user: user },
+        data: {
+          token: token,
+        },
       });
     });
   } catch (err) {
