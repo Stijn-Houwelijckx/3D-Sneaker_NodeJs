@@ -35,11 +35,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Using the routes
 app.use("/api/v1/users", userRouter);
-app.use(
-  "/api/v1/orders",
-  passport.authenticate("jwt", { session: false }),
-  orderRouter
-);
+app.use("/api/v1/orders", orderRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
