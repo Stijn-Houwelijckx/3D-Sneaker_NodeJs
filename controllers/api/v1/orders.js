@@ -59,34 +59,6 @@ const index = async (req, res) => {
   }
 };
 
-// const OrderSchema = new Schema({
-//   user: {
-//     name: { type: String, required: true },
-//     email: { type: String, required: true },
-//     address: {
-//       street: { type: String, required: true },
-//       houseNr: { type: String, required: true },
-//       zipcode: { type: String, required: true },
-//       city: { type: String, required: true },
-//     },
-//   },
-//   sneaker: {
-//     parts: [
-//       {
-//         partName: { type: String, required: true },
-//         color: { type: String, default: "white" },
-//         material: { type: String, default: "default" },
-//       },
-//     ],
-//   },
-//   orderDate: { type: Date, default: Date.now },
-//   status: {
-//     type: String,
-//     enum: ["Pending", "In production", "Shipped", "Completed"],
-//     default: "Pending",
-//   },
-// });
-
 // Update order status
 const update = async (req, res) => {
   const id = req.params.id;
@@ -121,8 +93,37 @@ const update = async (req, res) => {
   }
 };
 
+// Delete order
+const destroy = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const order = await Order.findByIdAndDelete(id);
+
+    // Check if order exists
+    if (!order) {
+      return res.status(404).json({
+        status: "error",
+        message: "Order not found",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: "Order deleted successfully",
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "error",
+      message: "Failed to delete order",
+      error: err.message,
+    });
+  }
+};
+
 module.exports = {
   create,
   index,
   update,
+  destroy,
 };

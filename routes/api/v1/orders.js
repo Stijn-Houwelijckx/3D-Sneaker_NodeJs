@@ -14,5 +14,10 @@ router.put(
   passport.authenticate("jwt", { session: false }),
   orderController.update
 );
+router.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  orderController.destroy
+);
 
 module.exports = router;
