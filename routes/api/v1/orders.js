@@ -9,5 +9,10 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   orderController.index
 );
+router.put(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  orderController.update
+);
 
 module.exports = router;
