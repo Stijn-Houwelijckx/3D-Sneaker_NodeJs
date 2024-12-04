@@ -19,5 +19,10 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   orderController.destroy
 );
+router.get(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  orderController.show
+);
 
 module.exports = router;

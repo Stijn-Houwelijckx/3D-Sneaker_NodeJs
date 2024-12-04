@@ -59,6 +59,42 @@ const index = async (req, res) => {
   }
 };
 
+// Get order by id
+const show = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const order = await Order.findById(id)
+      .populate("user", "name email")
+      .lean();
+
+    // Remove unwanted fields like '__v' and '_id' from parts
+    order.sneaker.parts.forEach((part) => {
+      delete part._id;
+    });
+
+    if (!order) {
+      return res.status(404).json({
+        status: "error",
+        message: "Order not found",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        order: order,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "error",
+      message: "Failed to fetch order",
+      error: err.message,
+    });
+  }
+};
+
 // Update order status
 const update = async (req, res) => {
   const id = req.params.id;
@@ -126,4 +162,5 @@ module.exports = {
   index,
   update,
   destroy,
+  show,
 };
