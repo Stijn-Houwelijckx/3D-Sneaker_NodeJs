@@ -8,7 +8,7 @@ const cors = require("cors");
 
 // Connecting to the database
 const mongoose = require("mongoose");
-const connection = config.get("mongodb");
+const connection = config.get("Database.conn");
 console.log("connection: " + connection);
 
 //mongoose.connect("mongodb://127.0.0.1:27017/MONGODBLES");

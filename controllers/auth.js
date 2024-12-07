@@ -1,5 +1,6 @@
 const User = require("../models/api/v1/User");
 const jwt = require("jsonwebtoken");
+const config = require("config");
 
 // Signup controller
 const signup = async (req, res) => {
@@ -56,7 +57,7 @@ const signup = async (req, res) => {
             uid: user._id,
             email: user.email,
           },
-          "TemporarySecretKey"
+          config.get("jwt.secret")
         );
 
         res.status(201).json({
@@ -112,7 +113,7 @@ const login = async (req, res) => {
           uid: user.user._id,
           email: user.user.email,
         },
-        "TemporarySecretKey"
+        config.get("jwt.secret")
       );
       // If user is found
       res.status(200).json({

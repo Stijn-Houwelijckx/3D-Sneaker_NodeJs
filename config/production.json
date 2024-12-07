@@ -1,3 +1,8 @@
 {
-  "mongodb": "mongodb+srv://dbUser:StijnThibault@3d-sneaker-cluster.cih8a.mongodb.net/?retryWrites=true&w=majority&appName=3D-Sneaker-Cluster"
+  "Database": {
+    "conn": "mongodb+srv://dbUser:StijnThibault@3d-sneaker-cluster.cih8a.mongodb.net/?retryWrites=true&w=majority&appName=3D-Sneaker-Cluster"
+  },
+  "jwt": {
+    "secret": "3D-Sneaker"
+  }
 }

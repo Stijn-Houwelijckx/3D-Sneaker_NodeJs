@@ -1,3 +1,8 @@
 {
-  "mongodb": "mongodb://127.0.0.1:27017/3D-SNEAKER"
+  "Database": {
+    "conn": "mongodb://127.0.0.1:27017/3D-SNEAKER"
+  },
+  "jwt": {
+    "secret": "3D-Sneaker"
+  }
 }
