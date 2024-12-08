@@ -17,7 +17,6 @@ mongoose.connect(connection);
 // Importing the routes
 const userRouter = require("./routes/api/v1/users");
 const orderRouter = require("./routes/api/v1/orders");
-const passport = require("./passport/passport");
 
 var app = express();
 
